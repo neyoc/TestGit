@@ -1,0 +1,22 @@
+How To Install cURL on Ubuntu 16.04
+
+If you want to install curl from repositories, The curl package is in the Ubuntu repositories.
+So just use the following command
+
+sudo apt-get install curl.
+
+But the repositories are not updated frequently. So it may be possible the you end up installing older version.
+
+Run the following set of commands to install curl 7.50.3 on Ubuntu 16.04  in Terminal.
+The same procedure can be followed for Ubuntu 15.04, Ubuntu 14.04 and other Ubuntu Derivatives:
+
+wget http://curl.haxx.se/download/curl-7.50.3.tar.gz
+tar -xvf curl-7.50.3.tar.gz
+cd curl-7.50.3/
+./configure
+make
+sudo make install
+
+Once installed, we can verify curl using the command given below:
+
+curl --version
