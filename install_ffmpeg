@@ -1,0 +1,29 @@
+Install FFmpeg On Ubuntu 16.04, Via Apt-Get (Command Line)
+
+Use the following commands on your terminal to install FFmpeg 3.1.3 on Ubuntu 16.04 Systems.
+The same procedure can be followed for Ubuntu 15.04, Ubuntu 14.04 and other Ubuntu Derivatives.
+
+Method 1
+sudo add-apt-repository ppa:jonathonf/ffmpeg-3
+sudo apt update
+sudo apt install ffmpeg libav-tools x264 x265
+
+Method 2
+sudo add-apt-repository ppa:djcj/hybrid
+sudo apt-get update
+sudo apt-get install ffmpeg
+
+Method 3
+This method to install ffmpeg depends on the version of Ubuntu you have install.
+For recent supported versions (i.e. 15.04 , 16.04 & 16.10 currently), this method should work and will get ffmpeg from the offical repositories.
+Just type the following command on your terminal:
+
+sudo apt-get install ffmpeg
+
+But if you are using 14.04 (and some other version near it), you can use libav-tools a fork of that project.
+The reason is because ffmpeg was removed from the offical ubuntu repositories for a few versions.
+So type the following command on your terminal:
+sudo apt-get install libav-tools
+
+
+Once installed use the FFmpeg to convert video nad audio files on Linux Ubuntu Systems.
