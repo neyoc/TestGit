@@ -1,0 +1,70 @@
+
+The Arithmetic expression is very important feature for performing number arithmetic operations in scripts.
+By default variables are treated as strings in bash scripts.
+But parsing a string to numbers is very easy using double parentheses and external command such as expr.
+
+
+ Arithmetic operations in Bash Shell
+ Arithmetic operations can be done on integers using the following methods
+
+ $(( expression ))
+
+ Example:
+ Run the following commands on terminal:
+ $ number_1=20
+ $ number_2=5
+ $ echo $(( number_1 + number_2 ))
+ $ echo $(( number_1 - number_2 ))
+ $ echo $(( number_1 * number_2 ))
+ $ echo $(( number_1 / number_2 ))
+ $ echo $(( number_1 % number_2 ))
+
+You can also create a bash script for the above operations. For example we have a script operations.sh
+
+#!/bin/bash
+number_1=20
+number_2=5
+echo "Addition = $(( number_1 + number_2 ))"
+echo "Subtraction = $(( number_1 - number_2 ))"
+echo "Multiplication = $(( number_1 * number_2 ))"
+echo "Division = $(( number_1 / number_2 ))"
+echo "pre-increment = $(( ++number_1 ))"
+echo "pre-decrement = $(( --number_2))"
+
+now run the above script
+
+chmod +x operations.sh
+./operations.sh
+
+Output:
+$ ./abc.sh
+Addition = 25
+Subtraction = 15
+Multiplication = 100
+Division = 4
+pre-increment = 21
+pre-decrement = 4
+
+
+expr — evaluate expression
+we can also use expr command to perform  Arithmetic operations on numbers.
+For example we have a script operations_expr.sh.
+
+#!/bin/bash
+number_1=20
+number_2=5
+echo "Addition = $(expr  $number_1 + $number_2 )"
+echo "Subtraction = $(expr  $number_1 - $number_2 )"
+echo "Multiplication = $(expr  $number_1 \* $number_2 )"
+echo "Division = $(expr  $number_1 / $number_2 )"
+
+now run the above script
+
+chmod +x operations_expr.sh
+./operations_expr.sh
+
+Output:
+Addition = 25
+Subtraction = 15
+Multiplication = 100
+Division = 4
