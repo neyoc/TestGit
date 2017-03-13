@@ -1,0 +1,172 @@
+How to kill a Process in UNIX / Linux Systems (Terminate Process in Linux)
+
+To kill processes in Linux several options can be used.
+kill command
+The most important and frequently used option is kill command.
+The kill command is used to terminate the processes on Linux and several other Unix like systems.
+The kill command enables us to kill a process without logging out or restarting the computer.
+Each process (also called task sometimes) on have its own unique process identification number (PID).
+The PID is assigned to the process as soon as it is created.
+
+The kill command has following syntax:
+
+kill [options or signals] <pid> [...]
+
+The kill command in its simplest for can be as follows:
+
+$kill  1565
+
+Where 1565 in the above command is the PID of the process.
+
+
+The PID of  a process can be found in following ways:
+
+- Use ps command to find the PID of process
+To print all the processes and their corresponding PID, run the following command:
+
+$ ps -A
+
+The sample output of the above command can be as follows.
+PID TTY          TIME CMD
+  1 ?        00:01:08 systemd
+  2 ?        00:00:00 kthreadd
+  3 ?        00:00:07 ksoftirqd/0
+  5 ?        00:00:00 kworker/0:0H
+  7 ?        00:04:22 rcu_sched
+  8 ?        00:00:00 rcu_bh
+  9 ?        00:00:02 migration/0
+ 10 ?        00:00:12 watchdog/0
+ 11 ?        00:00:11 watchdog/1
+ 12 ?        00:00:02 migration/1
+ 13 ?        00:00:11 ksoftirqd/1
+ 15 ?        00:00:00 kworker/1:0H
+ 16 ?        00:00:11 watchdog/2
+ 17 ?        00:00:02 migration/2
+ 18 ?        00:00:05 ksoftirqd/2
+ 20 ?        00:00:00 kworker/2:0H
+ 21 ?        00:00:10 watchdog/3
+ 22 ?        00:00:02 migration/3
+ 23 ?        00:00:17 ksoftirqd/3
+ 25 ?        00:00:00 kworker/3:0H
+ 26 ?        00:00:00 kdevtmpfs
+ 27 ?        00:00:00 netns
+ 28 ?        00:00:00 perf
+ 29 ?        00:00:03 khungtaskd
+ 30 ?        00:00:00 writeback
+ 31 ?        00:00:00 ksmd
+ 32 ?        00:03:40 khugepaged
+ 33 ?        00:00:00 crypto
+ 34 ?        00:00:00 kintegrityd
+ 35 ?        00:00:00 bioset
+ 36 ?        00:00:00 kblockd
+ 37 ?        00:00:00 ata_sff
+ 38 ?        00:00:00 md
+
+If you know the process name you can get its PID using the grep on ps command.
+For example you want to know the PID of process whose name is psql the following command will give you the PID of the psql.
+$ ps aux | grep psql
+
+The sample output of the above command can be as follows.
+user    6763  0.0  0.0 113292  6756 pts/31   S+   Feb28   0:00 /usr/lib/postgresql/9.5/bin/psql -U user_name platformdb_test
+user   15078  0.0  0.0  15756  1036 pts/28   R+   12:34   0:00 grep --color=auto psql
+user   18735  0.0  0.1 113292  8612 pts/27   S+   Mär10   0:00 /usr/lib/postgresql/9.5/bin/psql -U user_name --host=127.0.1.1 --port=34453 platformdb
+
+- Use pidof command to find the PID of process
+For example you want to know the PID of process whose name is psql the following command will give you the PID of the psql.
+$ pidof psql
+Output
+1658
+
+The following command can be use to kill process based upon PID
+
+kill -9 1656
+
+or
+
+kill -SIGTERM 1656
+
+where pid=1656.
+-9 flag in the above command is SIGKILL.
+The  default signal for kill is SIGTERM.
+
+To kill more then one processes use the following command
+
+# kill PID1 PID2 PID3
+or
+# kill -9 PID1 PID2 PID3
+or
+# kill -SIGKILL PID1 PID2 PID3
+
+where PID1, PID2, PID3 are the PID of the processes.
+
+To list all the signal names with their corresponding number use following command
+$ kill -l
+Output:
+ 1) SIGHUP	 2) SIGINT	 3) SIGQUIT	 4) SIGILL	 5) SIGTRAP
+ 6) SIGABRT	 7) SIGBUS	 8) SIGFPE	 9) SIGKILL	10) SIGUSR1
+11) SIGSEGV	12) SIGUSR2	13) SIGPIPE	14) SIGALRM	15) SIGTERM
+16) SIGSTKFLT	17) SIGCHLD	18) SIGCONT	19) SIGSTOP	20) SIGTSTP
+21) SIGTTIN	22) SIGTTOU	23) SIGURG	24) SIGXCPU	25) SIGXFSZ
+26) SIGVTALRM	27) SIGPROF	28) SIGWINCH	29) SIGIO	30) SIGPWR
+31) SIGSYS	34) SIGRTMIN	35) SIGRTMIN+1	36) SIGRTMIN+2	37) SIGRTMIN+3
+38) SIGRTMIN+4	39) SIGRTMIN+5	40) SIGRTMIN+6	41) SIGRTMIN+7	42) SIGRTMIN+8
+43) SIGRTMIN+9	44) SIGRTMIN+10	45) SIGRTMIN+11	46) SIGRTMIN+12	47) SIGRTMIN+13
+48) SIGRTMIN+14	49) SIGRTMIN+15	50) SIGRTMAX-14	51) SIGRTMAX-13	52) SIGRTMAX-12
+53) SIGRTMAX-11	54) SIGRTMAX-10	55) SIGRTMAX-9	56) SIGRTMAX-8	57) SIGRTMAX-7
+58) SIGRTMAX-6	59) SIGRTMAX-5	60) SIGRTMAX-4	61) SIGRTMAX-3	62) SIGRTMAX-2
+
+some other examples
+kill -9 -1
+       Kill all processes you can kill.
+
+kill -l 11
+       Translate number 11 into a signal name.
+
+kill -L
+       List the available signal choices in a nice table.
+
+kill 123 543 2341 3453
+       Send the default signal, SIGTERM, to all those processes.
+
+kill -legal
+              List signal names.  This option has optional argument, which will convert signal number to signal
+              name, or other way round.
+
+
+killall command
+killall cammand can be used to kill processes by their name.
+
+killall syntex:
+killall [-Z, --context pattern] [-e, --exact] [-g, --process-group] [-i, --interactive] [-o, --older-than TIME] [-q, --quiet]
+[-r, --regexp] [-s, --signal SIGNAL, -SIGNAL] [-u, --user user] [-v, --verbose] [-w, --wait] [-y, --younger-than TIME]
+[-I, --ignore-case] [-V, --version] [--] name ...
+
+killall  sends  a  signal  to all processes running any of the specified commands.  If no signal name is specified, SIGTERM is sent.
+Signals can be specified either by name (e.g.  -HUP or -SIGHUP) or by number (e.g.  -1) or by option -s.
+
+Example:
+For example you want to kill the process whose name is psql. use the following command:
+killall psql
+
+
+pkill command
+pkill command look up or signal processes based on name and other attributes.
+
+syntex
+pkill [options] pattern
+
+Example:
+Send SIGTERM to all the process which has psql in its name.
+$ pkill psql
+
+before giving the above command we can find which processes are fulfilling the above criteria by following command:
+$ pgrep -l psql
+6763 psql
+18735 psql
+
+$ pkill psql
+
+We can find the status of a process by using one of the command below:
+$ service psql status
+$ pgrep psql
+$ ps -aux | grep psql
