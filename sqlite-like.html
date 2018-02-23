@@ -1,0 +1,256 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>SQLite LIKE operator</title>
+    <meta name="description" content="The SQLite LIKE Operator - SQLite Tutorials for Beginners - Learn SQLite basic to advanced concepts with examples including database clauses command functions administration queries and usage along with Android, C, C++, Python and JAVA in simple steps. This tutorial takes you starting from basic to advance SQLite concepts."
+    />
+    <meta name="keywords" content="LIKE, Query, SQLite, Programming, Database, Clauses, Commands, Functions, Administration, Queries, Simple, Steps, Basic, Advanced, Concepts."
+    />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="img/SQLite3-tutorial.jpg">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="icon" href="img/SQLite3-tutorial.jpg">
+    <style>
+        body {
+            padding-top: 50px;
+            padding-bottom: 20px;
+        }
+    </style>
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+    <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script>
+        $(function () {
+            $("#header").load("header.html");
+            $("#footer").load("footer.html"); $("#side-bar-right").load("side-bar-right.html"); $("#content-down").load("content-down.html"); $("#content-up").load("content-up.html");
+        });
+    </script>
+</head>
+
+<body>
+
+    <!-- Fixed navbar-->
+    <div id="header"></div>
+    <!--navbar-->
+
+
+    <div class="container">
+        <div class="row">
+
+            <!-- /.col-sm-9 -->
+            <div class="col-sm-6 col-sm-push-3">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">The SQLite LIKE Operator</div>
+                    <div class="panel-body">
+                        <center>
+                            <h1>The SQLite LIKE Operator</h1>
+                        </center>
+                        <p>In SQLite the <strong>LIKE</strong> operator is used along with WHERE clausing for searching strings
+                            in a column againt specified pattern using wildcards.
+                            <p>There are two wildcards which used in simultaneity with the LIKE operator −</p>
+                            <ul>
+                                <li>The percent sign (%) - represents zero, one, or multiple characters</li>
+                                <li>The underscore (_) - represents a single character.</li>
+                            </ul>
+                            <p>The underscore and the percent sign may also be used in different combinations!</p>
+                            <h2>SQLite LIKE Operator Syntax</h2>
+                            <p>In SQLite it is possible to use <strong>LIKE</strong> operator using the following syntax.</p>
+                            <pre class="prettyprint">
+
+SELECT *
+FROM table_name
+WHERE column LIKE pattern; 
+                            </pre>
+                            <p>OR </p>
+                            <pre class="prettyprint">
+
+SELECT column_1, column_2, ...
+FROM table_name
+WHERE column LIKE pattern; 
+                            </pre>
+                            <p>In the above syntax the <b>pattern</b> can be in one or more combinations.</p>
+
+                            <table class="table table-striped  table-bordered">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>LIKE Operator</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>WHERE AGE LIKE '2%'</td>
+                                        <td>Search and finds the values that starts with "2" e.g. 20 , 21, 26, 29 ..</td>
+                                    </tr>
+                                    <tr>
+                                        <td>WHERE AGE LIKE '%6'</td>
+                                        <td>Search and finds the values that ends with "6" e.g. 16, 26, 36, 46 ...</td>
+                                    </tr>
+                                    <tr>
+                                        <td>WHERE INVENTORY LIKE '%123%'</td>
+                                        <td>Search and finds values that contains "123" in any position e.g 1123 1234 41235 ...</td>
+                                    </tr>
+                                    <tr>
+                                        <td>WHERE AGE LIKE '_3%'</td>
+                                        <td>Search and finds values that contains "3" in the second position e.g. 23, 132, 43</td>
+                                    </tr>
+                                    <tr>
+                                        <td>WHERE INVENTORY LIKE '3_%_%'</td>
+                                        <td>Search and finds values that starts with "3" and are at least 3 characters in length e.g. 325, 3696, 32457</td>
+                                    </tr>
+                                    <tr>
+                                        <td>WHERE INVENTORY LIKE '4%7'</td>
+                                        <td>Search and finds values that starts with "4" and ends with "7" e.g. 4557, 427, 42587</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <hr>
+                            <h2>Example:</h2>
+                            <p>So let's consider we have created <strong>SCHOOL</strong> database. And we have created a <strong>STUDENTS</strong>                                table in this database.</p>
+                            <p>The <strong>STUDENTS</strong> table have five columns (ID, NAME, SURNAME, AGE, ADDRESS).</p>
+                            <p>The <strong>STUDENTS</strong> table also have some data inside it as shown below:</p>
+                            <pre class="prettyprint notranslate">
+ID          NAME        SURNAME     AGE         ADDRESS
+----------  ----------  ----------  ----------  ----------
+1           Mark        Osaka       20          Munich
+2           Tom         white       21          Cologne 
+3           Patric      Rossman     19          Essen
+4           Noor        Khan        22          Bonn
+5           Julia       Tesar       18          Berlin
+6           Tim         Netten      20          Frankfurt
+7           John        Mevric      17          Wuppertal
+8           Jerry       Bann        20          Velbert
+                            </pre>
+                            <p> So Let's say we want to find all students whose age is between 20's.</p>
+                            <p> We can use the following SQLite statement:</p>
+                            <pre class="prettyprint notranslate">
+sqlite> SELECT * FROM STUDENTS WHERE AGE LIKE '2%';
+                            </pre>
+                            <p>Now when we select the <strong>STUDENTS</strong> table again, it will look as below:</p>
+                            <pre class="prettyprint notranslate">
+ID          NAME        SURNAME     AGE         ADDRESS
+----------  ----------  ----------  ----------  ----------
+1           Mark        Osaka       20          Munich
+2           Tom         white       21          Cologne 
+4           Noor        Khan        22          Bonn
+6           Tim         Netten      20          Frankfurt
+8           Jerry       Bann        20          Velbert
+                            </pre>
+                            <hr>
+
+                    </div>
+                </div>
+                <div id="content-down"></div>
+            </div>
+            <div class="col-sm-3 col-sm-pull-6">
+                <div class="list-group">
+
+                    <h2 class="left"><span class="left_h2">SqLite</span> Tutorial</h2>
+                    <a target="_top" class="list-group-item" href="index.html"><span class="fa fa-square"></span>&nbsp;  SqLite - HOME</a>
+                    <a target="_top" class="list-group-item " href="sqlite-intro.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Intro</a>
+                    <a target="_top" class="list-group-item " href="sqlite-installation.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Installation</a>
+                    <a target="_top" class="list-group-item" href="sqlite-syntax.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Syntax</a>
+                    <a target="_top" class="list-group-item " href="sqlite-data-types.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Data Types</a>
+                    <a target="_top" class="list-group-item" href="sqlite-create-db.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Create DB</a>
+                    <a target="_top" class="list-group-item" href="sqlite-create-table.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Create Table</a>
+                    <a target="_top" class="list-group-item " href="sqlite-drop-table.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Drop Table</a>
+                    <a target="_top" class="list-group-item" href="sqlite-select.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Select</a>
+                    <a target="_top" class="list-group-item" href="sqlite-distinct.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Distinct</a>
+                    <a target="_top" class="list-group-item" href="sqlite-where.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Where</a>
+                    <a target="_top" class="list-group-item" href="sqlite-and-or.html"><span class="fa fa-square"></span>&nbsp;  SqLite - And &amp; Or</a>
+                    <a target="_top" class="list-group-item" href="sqlite-orderby.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Order By</a>
+                    <a target="_top" class="list-group-item " href="sqlite-insert.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Insert Into</a>
+                    <a target="_top" class="list-group-item" href="sqlite-update.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Update</a>
+                    <a target="_top" class="list-group-item" href="sqlite-delete.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Delete</a>
+                    <a target="_top" class="list-group-item" href="sqlite-injection.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Injection</a>
+                    <a target="_top" class="list-group-item" href="sqlite-top.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Select Top</a>
+                    <a target="_top" class="list-group-item active" href="sqlite-like.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Like</a>
+                    <a target="_top" class="list-group-item" href="sqlite-wildcards.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Wildcards</a>
+                    <a target="_top" class="list-group-item" href="sqlite-in.html"><span class="fa fa-square"></span>&nbsp;  SqLite - In</a>
+                    <a target="_top" class="list-group-item" href="sqlite-between.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Between</a>
+                    <a target="_top" class="list-group-item" href="sqlite-alias.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Aliases</a>
+                    <a target="_top" class="list-group-item" href="sqlite-join.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Joins</a>
+                    <a target="_top" class="list-group-item" href="sqlite-join-inner.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Inner Join</a>
+                    <a target="_top" class="list-group-item" href="sqlite-join-left.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Left Join</a>
+                    <a target="_top" class="list-group-item" href="sqlite-join-right.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Right Join</a>
+                    <a target="_top" class="list-group-item" href="sqlite-join-full.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Full Join</a>
+                    <a target="_top" class="list-group-item" href="sqlite-union.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Union</a>
+                    <a target="_top" class="list-group-item" href="sqlite-select-into.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Select Into</a>
+                    <a target="_top" class="list-group-item" href="sqlite-insert-into-select.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Insert Into Select</a>
+                    <a target="_top" class="list-group-item" href="sqlite-constraints.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Constraints</a>
+                    <a target="_top" class="list-group-item" href="sqlite-notnull.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Not Null</a>
+                    <a target="_top" class="list-group-item" href="sqlite-unique.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Unique</a>
+                    <a target="_top" class="list-group-item" href="sqlite-primarykey.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Primary Key</a>
+                    <a target="_top" class="list-group-item" href="sqlite-foreignkey.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Foreign Key</a>
+                    <a target="_top" class="list-group-item" href="sqlite-check.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Check</a>
+                    <a target="_top" class="list-group-item" href="sqlite-default.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Default</a>
+                    <a target="_top" class="list-group-item" href="sqlite-create-index.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Create Index</a>
+                    <a target="_top" class="list-group-item" href="sqlite-drop.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Drop</a>
+                    <a target="_top" class="list-group-item" href="sqlite-alter.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Alter</a>
+                    <a target="_top" class="list-group-item" href="sqlite-autoincrement.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Auto Increment</a>
+                    <a target="_top" class="list-group-item" href="sqlite-view.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Views</a>
+                    <a target="_top" class="list-group-item" href="sqlite-dates.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Dates</a>
+                    <a target="_top" class="list-group-item" href="sqlite-null-values.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Null Values</a>
+                    <a target="_top" class="list-group-item" href="sqlite-isnull.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Null Functions</a>
+                    <a target="_top" class="list-group-item" href="sqlite-datatypes-general.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Data Types</a>
+                    <a target="_top" class="list-group-item" href="sqlite-datatypes.html"><span class="fa fa-square"></span>&nbsp;  SqLite - DB Data Types</a>
+                    <br>
+                    <h2 class="left"><span class="left_h2">SqLite</span> Functions</h2>
+                    <a target="_top" class="list-group-item" href="sqlite-functions.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Functions</a>
+                    <a target="_top" class="list-group-item" href="sqlite-func-avg.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Avg()</a>
+                    <a target="_top" class="list-group-item" href="sqlite-func-count.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Count()</a>
+                    <a target="_top" class="list-group-item" href="sqlite-func-first.html"><span class="fa fa-square"></span>&nbsp;  SqLite - First()</a>
+                    <a target="_top" class="list-group-item" href="sqlite-func-last.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Last()</a>
+                    <a target="_top" class="list-group-item" href="sqlite-func-max.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Max()</a>
+                    <a target="_top" class="list-group-item" href="sqlite-func-min.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Min()</a>
+                    <a target="_top" class="list-group-item" href="sqlite-func-sum.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Sum()</a>
+                    <a target="_top" class="list-group-item" href="sqlite-groupby.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Group By</a>
+                    <a target="_top" class="list-group-item" href="sqlite-having.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Having</a>
+                    <a target="_top" class="list-group-item" href="sqlite-func-ucase.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Ucase()</a>
+                    <a target="_top" class="list-group-item" href="sqlite-func-lcase.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Lcase()</a>
+                    <a target="_top" class="list-group-item" href="sqlite-func-mid.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Mid()</a>
+                    <a target="_top" class="list-group-item" href="sqlite-func-len.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Len()</a>
+                    <a target="_top" class="list-group-item" href="sqlite-func-round.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Round()</a>
+                    <a target="_top" class="list-group-item" href="sqlite-func-now.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Now()</a>
+                    <a target="_top" class="list-group-item" href="sqlite-func-format.html"><span class="fa fa-square"></span>&nbsp;  SqLite - Format()</a>
+                    <br>
+
+
+                </div>
+            </div>
+
+            <div class="col-sm-3">
+                <div id="side-bar-right"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fixed footer -->
+    <div id="footer"></div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.js"></script>
+    <script>
+        window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.js"><\/script>')
+    </script>
+
+    <script src="js/vendor/bootstrap.min.js"></script>
+
+    <script src="js/main.js"></script>
+
+
+</body>
+
+</html>
