@@ -23,3 +23,11 @@ int main(int argc, char** argv)
     glutMainLoop();
     return 0;
 }
+/*
+compile
+> g++ main.cpp -o firstOpenGlApp -lglut -lGLU -lGL
+
+run
+
+> ./firstOpenGlApp
+*/
